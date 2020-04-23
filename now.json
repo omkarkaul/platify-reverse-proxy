@@ -1,10 +1,10 @@
 {
 	"version": 2,
-	"builds": [{"src":"proxy.js", "use":"@now/node-server"}],
+	"builds": [{"src":"index.js", "use":"@now/node-server"}],
 	"routes": [
 		{
 			"src":"/",
-			"dest":"/proxy.js",
+			"dest":"/index.js",
 			"methods": ["GET"]
 		}
 	]
