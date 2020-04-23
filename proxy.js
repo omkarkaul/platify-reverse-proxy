@@ -3,9 +3,11 @@ const fetch = require('node-fetch');
 
 const app = express();
 
-app.get('/plate', async (req, res) => {
-    const availability = await getPlateAvailability('reee');
-    const content = await getPlateContent('reee');
+app.get('/:plate', async (req, res) => {
+    const plate = req.params.plate;
+
+    const availability = await getPlateAvailability(plate);
+    const content = await getPlateContent(plate);
 
     const data = {
         "availability" : availability,
