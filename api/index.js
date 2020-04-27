@@ -5,18 +5,23 @@ module.exports = async (req, res) => {
 	const availabilityResponse = await getPlateAvailability(plate);
 	const contentResponse = await getPlateContent(plate);
 
+	let data;
+
 	if (availabilityResponse.status === 200 && contentResponse.status === 200) {
-		const data = {
+		data = {
+			"status": 200,
 			"availability" : availabilityResponse.available,
 			"content" : contentResponse.data
 		};
-	
-		res.setHeader('Access-Control-Allow-Origin', '*')
-		res.json(data);
 	} else {
-		res.setHeader('Access-Control-Allow-Origin', '*')
-		res.send("data unavailable");
+		data = {
+			status: 500,
+			message: "Data unavailable!"
+		}
 	}
+
+	res.setHeader('Access-Control-Allow-Origin', '*')
+	res.json(data)
 }
 
 async function getPlateAvailability(plate) {
